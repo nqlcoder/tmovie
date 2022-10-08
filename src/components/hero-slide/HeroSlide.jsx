@@ -39,11 +39,11 @@ const HeroSlide = () => {
                 grabCursor={true}
                 spaceBetween={0}
                 slidesPerView={1}
+                // autoplay={{delay: 3000}}
             >
                 {movieItems.map((item, i) => (
                     <SwiperSlide key={i}>
                         {({ isActive }) => (
-                            // eslint-disable-next-line jsx-a11y/alt-text
                             <HeroSlideItem
                                 item={item}
                                 className={`${isActive ? "active" : ""}`}
@@ -71,11 +71,15 @@ const HeroSlideItem = (props) => {
     const setModalActive = async () => {
         const modal = document.querySelector(`#modal_${item.id}`);
 
+        console.log(modal);
+
         const videos = await tmdbApi.getVideos(category.movie, item.id);
+
+        console.log(videos);
 
         if (videos.results.length > 0) {
             const videSrc =
-                "https://www.youtube.com/embed/" + videos.results[0].key;
+                "https://www.youtube.com/embed/" + videos?.results[0].key;
             modal
                 .querySelector(".modal__content > iframe")
                 .setAttribute("src", videSrc);
