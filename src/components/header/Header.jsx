@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+
+import { Link, useLocation } from "react-router-dom";
 
 import "./header.scss";
 
-import { Link, useLocation } from "react-router-dom";
-import { useRef } from "react";
-
 import logo from "../../assets/tmovie.png";
-import { useEffect } from "react";
 
 const headerNav = [
     {
@@ -24,10 +22,10 @@ const headerNav = [
 ];
 
 const Header = () => {
-    const { pathName } = useLocation();
+    const { pathname } = useLocation();
     const headerRef = useRef(null);
 
-    const active = headerNav.findIndex((e) => e.path === pathName);
+    const active = headerNav.findIndex((e) => e.path === pathname);
 
     useEffect(() => {
         const shrinkHeader = () => {
@@ -40,7 +38,6 @@ const Header = () => {
                 headerRef.current.classList.remove("shrink");
             }
         };
-
         window.addEventListener("scroll", shrinkHeader);
         return () => {
             window.removeEventListener("scroll", shrinkHeader);
@@ -54,7 +51,6 @@ const Header = () => {
                     <img src={logo} alt="" />
                     <Link to="/">tMovies</Link>
                 </div>
-
                 <ul className="header__nav">
                     {headerNav.map((e, i) => (
                         <li

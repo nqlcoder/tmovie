@@ -16,7 +16,8 @@ function App() {
             <Route
                 render={(props) => (
                     <>
-                        <Header {...props} /> <Routes />
+                        <Header {...props} />
+                        <Routes />
                         <Footer />
                     </>
                 )}
